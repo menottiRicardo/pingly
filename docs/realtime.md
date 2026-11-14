@@ -22,6 +22,23 @@ client.on('invoice.paid', (payload, envelope) => {
 client.send('presence.update', { online: true });
 ```
 
+## Creating the client
+
+Create the client once, outside your components, and it connects right away. If it depends on component state (a user id, a chosen transport), turn off `autoConnect` and connect in an effect, so clients React creates and discards never open a connection:
+
+```tsx
+const client = useMemo(
+  () => createNotificationClient<AppEvents>({ transport, autoConnect: false }),
+  [transport],
+);
+useEffect(() => {
+  client.connect();
+  return () => client.disconnect();
+}, [client]);
+```
+
+Clients that also declare outgoing messages (`createNotificationClient<In, Out>`) work everywhere a client is accepted.
+
 ## Wire format
 
 By default each message is `{ type, payload, id?, createdAt? }` (or an array of them). Use `parse` for anything else:

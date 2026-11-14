@@ -67,6 +67,8 @@ function isEnvelope(value: unknown): boolean {
 
 /** A typed realtime connection that reconnects on its own. */
 export class NotificationClient<In extends EventMap = EventMap, Out extends EventMap = EventMap> {
+  /** Type-only marker that lets TypeScript infer the event map. Never set at runtime. */
+  declare readonly '~events'?: In;
   private readonly emitter = new Emitter<ClientEvents<In>>();
   private readonly typed = new Map<string, Set<Handler<unknown, Envelope<In>>>>();
   private readonly listeners = new Set<() => void>();

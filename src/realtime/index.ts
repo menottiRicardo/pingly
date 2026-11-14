@@ -31,6 +31,7 @@ export { useConnectionStatus, useNotificationClient, useNotificationEvent } from
 export type {
   CloseInfo,
   ConnectionSource,
+  EventFeed,
   ConnectionStatus as ConnectionState,
   Envelope,
   EventMap,

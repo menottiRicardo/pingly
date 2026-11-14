@@ -17,10 +17,12 @@ type Events = {
   'invoice.paid': { invoiceId: string; amount: number };
   'system.notice': { title: string; body: string };
 };
+type Outgoing = { 'presence.update': { online: boolean } };
 
 async function setup(extra?: ReactNode) {
   const t = manualTransport();
-  const client = createNotificationClient<Events>({ transport: t.transport });
+  // Declaring outgoing types must not stop the client fitting the provider and routes.
+  const client = createNotificationClient<Events, Outgoing>({ transport: t.transport });
   const inbox = createInbox({ adapter: memoryAdapter([]) });
   const routes = defineRoutes(client, {
     'invoice.paid': {

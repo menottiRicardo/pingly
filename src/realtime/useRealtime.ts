@@ -30,12 +30,16 @@ export function useConnectionStatus(client?: ConnectionSource): ConnectionStatus
 }
 
 /** Run `handler` for every event of one type. The latest handler is always used. */
-export function useNotificationEvent<In extends EventMap, K extends keyof In & string>(
+export function useNotificationEvent<
+  In extends EventMap,
+  K extends keyof In & string,
+  Out extends EventMap = EventMap,
+>(
   type: K,
   handler: (payload: In[K], envelope: Extract<Envelope<In>, { type: K }>) => void,
-  client?: NotificationClient<In, EventMap>,
+  client?: NotificationClient<In, Out>,
 ): void {
-  const resolved = useNotificationClient<In>(client);
+  const resolved = useNotificationClient<In, Out>(client);
   const ref = useRef(handler);
   useEffect(() => {
     ref.current = handler;

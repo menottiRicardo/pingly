@@ -1,8 +1,7 @@
 import type { Notification } from '../inbox/types';
 import type { InboxStore } from '../inbox/store';
 import type { ToastOptions } from '../toast/types';
-import type { NotificationClient } from './client';
-import type { Envelope, EventMap } from './types';
+import type { Envelope, EventFeed, EventMap } from './types';
 
 /** What a realtime event should become in the inbox. `id`, `type` and `createdAt` are filled in when missing. */
 export type NotificationDraft<C> = Omit<Notification<C>, 'id' | 'type' | 'createdAt'> &
@@ -62,7 +61,7 @@ export function toNotification<C>(
  * Returns a function that stops the bridge.
  */
 export function bridgeEvents<E extends EventMap, C>(
-  client: NotificationClient<E, EventMap>,
+  client: EventFeed<E>,
   { inbox, routes, onToast, onNotification, shouldDeliver }: BridgeOptions<E, C>,
 ): () => void {
   return client.onAny((envelope) => {
@@ -86,7 +85,7 @@ export function bridgeEvents<E extends EventMap, C>(
 
 /** Identity helper that types routes from a client's event map. */
 export function defineEventRoutes<E extends EventMap, C>(
-  _client: NotificationClient<E, EventMap>,
+  _client: EventFeed<E>,
   routes: EventRoutes<E, C>,
 ): EventRoutes<E, C> {
   return routes;

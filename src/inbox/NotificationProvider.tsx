@@ -7,7 +7,7 @@ import type { PreferencesStore } from '../preferences/store';
 import type { NotificationClient } from '../realtime/client';
 import { ClientContext } from '../realtime/ClientContext';
 import { bridgeEvents, type BridgeOptions, type EventRoutes } from '../realtime/routes';
-import type { EventMap } from '../realtime/types';
+import type { ConnectionSource, EventFeed, EventMap } from '../realtime/types';
 import type { Theme } from '../shared/config';
 import { ConfigContext } from '../shared/ConfigContext';
 import { toast } from '../toast/instance';
@@ -33,7 +33,7 @@ export interface NotificationProviderProps<E extends EventMap = EventMap> {
   /** The inbox to share. Defaults to a new in-memory inbox. */
   inbox?: AnyInbox;
   /** Realtime client whose events flow into the inbox and toasts. */
-  client?: NotificationClient<E, EventMap>;
+  client?: EventFeed<E> & ConnectionSource;
   /** How each realtime event type becomes a notification and/or toast. */
   routes?: EventRoutes<E, ReactNode>;
   /** Return `false` to suppress a realtime delivery. */

@@ -53,6 +53,16 @@ export type Transport = (
   context: TransportContext,
 ) => TransportConnection | Promise<TransportConnection>;
 
+/**
+ * Anything that delivers typed events. Every `NotificationClient<E, Out>`
+ * satisfies it, whatever its outgoing message types.
+ */
+export interface EventFeed<E extends EventMap> {
+  onAny(handler: (envelope: Envelope<E>) => void): () => void;
+  /** Type-only marker that lets TypeScript infer the event map. Never set at runtime. */
+  readonly '~events'?: E;
+}
+
 /** The part of a client that status UIs need; any typed client satisfies it. */
 export interface ConnectionSource {
   subscribe(listener: () => void): () => void;

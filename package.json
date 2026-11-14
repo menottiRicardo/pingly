@@ -93,6 +93,16 @@
         "default": "./dist/preferences/index.cjs"
       }
     },
+    "./testing": {
+      "import": {
+        "types": "./dist/testing/index.d.ts",
+        "default": "./dist/testing/index.js"
+      },
+      "require": {
+        "types": "./dist/testing/index.d.cts",
+        "default": "./dist/testing/index.cjs"
+      }
+    },
     "./styles.css": "./dist/styles.css",
     "./*.css": "./dist/*.css",
     "./package.json": "./package.json"
@@ -112,7 +122,7 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "example": "vite examples/basic",
+    "example": "vite examples/playground",
     "prepublishOnly": "pnpm typecheck && pnpm test && pnpm build"
   },
   "peerDependencies": {

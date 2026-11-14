@@ -2,7 +2,10 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "types": ["vite/client"],
-    "paths": { "pingly": ["../../src/index.ts"] }
+    "paths": {
+      "pingly": ["../../src/index.ts"],
+      "pingly/*": ["../../src/*/index.ts"]
+    }
   },
   "include": ["src", "vite.config.ts"]
 }

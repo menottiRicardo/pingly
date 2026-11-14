@@ -1,5 +1,5 @@
 import type { MouseEvent, ReactNode } from 'react';
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import { useConfig } from '../shared/ConfigContext';
 import { cx } from '../shared/cx';
 import { ICONS } from '../shared/icons';
@@ -48,6 +48,7 @@ export function NotificationItem({
   const { locale } = useConfig();
   const now = useNow();
   const titleId = useId();
+  const [avatarFailed, setAvatarFailed] = useState(false);
   const labels = { ...DEFAULT_INBOX_LABELS, ...labelOverrides };
   const all = [n, ...grouped];
   const ids = all.map((item) => item.id);
@@ -68,8 +69,8 @@ export function NotificationItem({
   const body = (
     <>
       <span className="pingly-item-avatar" aria-hidden="true">
-        {n.avatar ? (
-          <img src={n.avatar} alt="" />
+        {n.avatar && !avatarFailed ? (
+          <img src={n.avatar} alt="" onError={() => setAvatarFailed(true)} />
         ) : (
           <span dangerouslySetInnerHTML={{ __html: ICONS.bell }} />
         )}

@@ -181,3 +181,13 @@ describe('UnreadBadge', () => {
     expect(screen.getByText('99+')).toBeInTheDocument();
   });
 });
+
+describe('avatars', () => {
+  it('falls back to an icon when the image fails', async () => {
+    await setup([n('1', { avatar: 'https://broken.test/a.png' })], <NotificationList />);
+    const img = document.querySelector('.pingly-item-avatar img')!;
+    fireEvent.error(img);
+    expect(document.querySelector('.pingly-item-avatar img')).toBeNull();
+    expect(document.querySelector('.pingly-item-avatar svg')).not.toBeNull();
+  });
+});

@@ -3,7 +3,15 @@ import { join } from 'node:path';
 import { defineConfig } from 'tsup';
 
 /** Public entry points; each becomes `pingly/<name>`. */
-export const ENTRIES = ['toast', 'inbox', 'realtime', 'banner', 'browser', 'preferences'] as const;
+export const ENTRIES = [
+  'toast',
+  'inbox',
+  'realtime',
+  'banner',
+  'browser',
+  'preferences',
+  'testing',
+] as const;
 
 /** Stylesheets in load order. `styles.css` bundles them all. */
 const STYLES = ['tokens', 'toast', 'inbox', 'realtime', 'banner', 'browser', 'preferences'];

@@ -1,0 +1,217 @@
+.pingly-toaster {
+  --pingly-bg: #ffffff;
+  --pingly-fg: #111827;
+  --pingly-muted: #4b5563;
+  --pingly-border: #e5e7eb;
+  --pingly-shadow: 0 6px 24px rgb(0 0 0 / 0.1), 0 1px 3px rgb(0 0 0 / 0.08);
+  --pingly-success: #16a34a;
+  --pingly-error: #dc2626;
+  --pingly-info: #2563eb;
+  --pingly-warning: #d97706;
+  --pingly-loading: #6b7280;
+  --pingly-action-bg: #111827;
+  --pingly-action-fg: #ffffff;
+  --pingly-radius: 10px;
+  --pingly-width: 356px;
+  --pingly-font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --pingly-duration: 200ms;
+
+  position: fixed;
+  z-index: 9999;
+  width: var(--pingly-width);
+  max-width: calc(100vw - 2 * var(--pingly-offset, 24px));
+  font-family: var(--pingly-font);
+  pointer-events: none;
+}
+
+.pingly-toaster[data-theme='dark'] {
+  --pingly-bg: #18181b;
+  --pingly-fg: #f4f4f5;
+  --pingly-muted: #a1a1aa;
+  --pingly-border: #27272a;
+  --pingly-shadow: 0 6px 24px rgb(0 0 0 / 0.5);
+  --pingly-success: #4ade80;
+  --pingly-error: #f87171;
+  --pingly-info: #60a5fa;
+  --pingly-warning: #fbbf24;
+  --pingly-loading: #a1a1aa;
+  --pingly-action-bg: #f4f4f5;
+  --pingly-action-fg: #18181b;
+}
+
+@media (prefers-color-scheme: dark) {
+  .pingly-toaster[data-theme='system'] {
+    --pingly-bg: #18181b;
+    --pingly-fg: #f4f4f5;
+    --pingly-muted: #a1a1aa;
+    --pingly-border: #27272a;
+    --pingly-shadow: 0 6px 24px rgb(0 0 0 / 0.5);
+    --pingly-success: #4ade80;
+    --pingly-error: #f87171;
+    --pingly-info: #60a5fa;
+    --pingly-warning: #fbbf24;
+    --pingly-loading: #a1a1aa;
+    --pingly-action-bg: #f4f4f5;
+    --pingly-action-fg: #18181b;
+  }
+}
+
+.pingly-toaster[data-y='top'] {
+  top: var(--pingly-offset, 24px);
+}
+.pingly-toaster[data-y='bottom'] {
+  bottom: var(--pingly-offset, 24px);
+}
+.pingly-toaster[data-x='left'] {
+  left: var(--pingly-offset, 24px);
+}
+.pingly-toaster[data-x='right'] {
+  right: var(--pingly-offset, 24px);
+}
+.pingly-toaster[data-x='center'] {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pingly-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pingly-gap, 12px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* Newest toast sits closest to the screen edge. */
+.pingly-toaster[data-y='bottom'] .pingly-list {
+  flex-direction: column-reverse;
+}
+
+.pingly-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 14px 16px;
+  color: var(--pingly-fg);
+  background: var(--pingly-bg);
+  border: 1px solid var(--pingly-border);
+  border-radius: var(--pingly-radius);
+  box-shadow: var(--pingly-shadow);
+  font-size: 14px;
+  line-height: 1.4;
+  pointer-events: auto;
+  animation: pingly-enter var(--pingly-duration) ease-out both;
+}
+.pingly-toast[data-state='leaving'] {
+  animation: pingly-leave var(--pingly-duration) ease-in both;
+  pointer-events: none;
+}
+
+.pingly-toaster[data-y='top'] .pingly-toast {
+  --pingly-from: -12px;
+}
+.pingly-toaster[data-y='bottom'] .pingly-toast {
+  --pingly-from: 12px;
+}
+
+@keyframes pingly-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--pingly-from, 12px)) scale(0.97);
+  }
+}
+@keyframes pingly-leave {
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.pingly-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  margin-top: -1px;
+}
+.pingly-toast[data-type='success'] .pingly-icon {
+  color: var(--pingly-success);
+}
+.pingly-toast[data-type='error'] .pingly-icon {
+  color: var(--pingly-error);
+}
+.pingly-toast[data-type='info'] .pingly-icon {
+  color: var(--pingly-info);
+}
+.pingly-toast[data-type='warning'] .pingly-icon {
+  color: var(--pingly-warning);
+}
+.pingly-toast[data-type='loading'] .pingly-icon {
+  color: var(--pingly-loading);
+}
+.pingly-toast[data-type='loading'] .pingly-icon svg {
+  animation: pingly-spin 0.8s linear infinite;
+}
+@keyframes pingly-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pingly-content {
+  flex: 1;
+  min-width: 0;
+}
+.pingly-title {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.pingly-description {
+  margin-top: 2px;
+  color: var(--pingly-muted);
+  overflow-wrap: anywhere;
+}
+
+.pingly-action,
+.pingly-close {
+  flex-shrink: 0;
+  font: inherit;
+  cursor: pointer;
+}
+.pingly-action {
+  padding: 4px 10px;
+  color: var(--pingly-action-fg);
+  background: var(--pingly-action-bg);
+  border: 0;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.pingly-close {
+  display: inline-flex;
+  padding: 2px;
+  color: var(--pingly-muted);
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+}
+.pingly-close svg {
+  width: 16px;
+  height: 16px;
+}
+.pingly-close:hover {
+  color: var(--pingly-fg);
+}
+.pingly-action:focus-visible,
+.pingly-close:focus-visible {
+  outline: 2px solid var(--pingly-info);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pingly-toast,
+  .pingly-toast[data-state='leaving'],
+  .pingly-toast[data-type='loading'] .pingly-icon svg {
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+  }
+}

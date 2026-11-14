@@ -1,0 +1,85 @@
+{
+  "name": "pingly",
+  "version": "0.1.0",
+  "description": "Lightweight, accessible toast notifications for React.",
+  "license": "MIT",
+  "author": "Ricardo Menotti",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/menottiRicardo/pingly.git"
+  },
+  "homepage": "https://github.com/menottiRicardo/pingly#readme",
+  "bugs": "https://github.com/menottiRicardo/pingly/issues",
+  "keywords": [
+    "react",
+    "toast",
+    "notifications",
+    "snackbar",
+    "alert",
+    "typescript"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "example": "vite examples/basic",
+    "prepublishOnly": "pnpm typecheck && pnpm test && pnpm build"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@types/node": "22.20.0",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.3",
+    "eslint": "10.6.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "jsdom": "29.1.1",
+    "prettier": "3.9.4",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "tsup": "8.5.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.62.1",
+    "vite": "8.1.2",
+    "vitest": "4.1.9"
+  },
+  "packageManager": "pnpm@11.9.0",
+  "engines": {
+    "node": ">=18"
+  }
+}

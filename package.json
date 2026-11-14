@@ -1,7 +1,7 @@
 {
   "name": "pingly",
-  "version": "0.1.0",
-  "description": "Lightweight, accessible toast notifications for React.",
+  "version": "1.0.0",
+  "description": "Everything notifications for React: toasts, a notification center with a bell, typed realtime delivery, banners, browser notifications and preferences.",
   "license": "MIT",
   "author": "Ricardo Menotti",
   "repository": {
@@ -12,10 +12,18 @@
   "bugs": "https://github.com/menottiRicardo/pingly/issues",
   "keywords": [
     "react",
-    "toast",
     "notifications",
-    "snackbar",
-    "alert",
+    "toast",
+    "notification-center",
+    "inbox",
+    "bell",
+    "websocket",
+    "sse",
+    "realtime",
+    "banner",
+    "alerts",
+    "web-notifications",
+    "preferences",
     "typescript"
   ],
   "type": "module",

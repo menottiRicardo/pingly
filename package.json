@@ -63,6 +63,36 @@
         "default": "./dist/realtime/index.cjs"
       }
     },
+    "./banner": {
+      "import": {
+        "types": "./dist/banner/index.d.ts",
+        "default": "./dist/banner/index.js"
+      },
+      "require": {
+        "types": "./dist/banner/index.d.cts",
+        "default": "./dist/banner/index.cjs"
+      }
+    },
+    "./browser": {
+      "import": {
+        "types": "./dist/browser/index.d.ts",
+        "default": "./dist/browser/index.js"
+      },
+      "require": {
+        "types": "./dist/browser/index.d.cts",
+        "default": "./dist/browser/index.cjs"
+      }
+    },
+    "./preferences": {
+      "import": {
+        "types": "./dist/preferences/index.d.ts",
+        "default": "./dist/preferences/index.js"
+      },
+      "require": {
+        "types": "./dist/preferences/index.d.cts",
+        "default": "./dist/preferences/index.cjs"
+      }
+    },
     "./styles.css": "./dist/styles.css",
     "./*.css": "./dist/*.css",
     "./package.json": "./package.json"

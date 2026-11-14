@@ -1,0 +1,38 @@
+.pingly-permission {
+  display: flex;
+  gap: 12px;
+  max-width: 420px;
+  padding: 16px;
+  background: var(--pingly-bg);
+  border: 1px solid var(--pingly-border);
+  border-radius: var(--pingly-radius);
+  box-shadow: var(--pingly-shadow);
+  font-size: 14px;
+}
+.pingly-permission-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--pingly-info-bg);
+  color: var(--pingly-accent);
+}
+.pingly-permission-icon span {
+  display: inline-flex;
+}
+.pingly-permission-title {
+  margin: 0;
+  font-weight: 600;
+}
+.pingly-permission-text {
+  margin: 4px 0 0;
+  color: var(--pingly-muted);
+}
+.pingly-permission-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}

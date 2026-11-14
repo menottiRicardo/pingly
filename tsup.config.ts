@@ -3,10 +3,10 @@ import { join } from 'node:path';
 import { defineConfig } from 'tsup';
 
 /** Public entry points; each becomes `pingly/<name>`. */
-export const ENTRIES = ['toast'] as const;
+export const ENTRIES = ['toast', 'inbox'] as const;
 
 /** Stylesheets in load order. `styles.css` bundles them all. */
-const STYLES = ['tokens', 'toast'];
+const STYLES = ['tokens', 'toast', 'inbox'];
 
 const USE_CLIENT = '"use client";\n';
 

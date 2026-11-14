@@ -2,3 +2,4 @@
    files into dist/styles.css. */
 @import './tokens.css';
 @import './toast.css';
+@import './inbox.css';

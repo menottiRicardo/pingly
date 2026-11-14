@@ -19,14 +19,19 @@ export interface TrapOptions {
   initialFocus?: HTMLElement | null;
   /** Restore focus to the previously focused element on release. Defaults to `true`. */
   returnFocus?: boolean;
+  /**
+   * Element to focus on release instead of the previously focused one. Useful
+   * because some browsers don't focus buttons when they are clicked.
+   */
+  returnFocusTo?: HTMLElement | null;
 }
 
 /** Keep Tab / Shift+Tab inside `container`. Returns a release function. */
 export function trapFocus(
   container: HTMLElement,
-  { initialFocus, returnFocus = true }: TrapOptions = {},
+  { initialFocus, returnFocus = true, returnFocusTo }: TrapOptions = {},
 ): () => void {
-  const previous = document.activeElement as HTMLElement | null;
+  const previous = returnFocusTo ?? (document.activeElement as HTMLElement | null);
   const first = initialFocus ?? getFocusable(container)[0];
   if (first) first.focus();
   else {

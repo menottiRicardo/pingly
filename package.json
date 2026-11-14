@@ -43,6 +43,16 @@
         "default": "./dist/toast/index.cjs"
       }
     },
+    "./inbox": {
+      "import": {
+        "types": "./dist/inbox/index.d.ts",
+        "default": "./dist/inbox/index.js"
+      },
+      "require": {
+        "types": "./dist/inbox/index.d.cts",
+        "default": "./dist/inbox/index.cjs"
+      }
+    },
     "./styles.css": "./dist/styles.css",
     "./*.css": "./dist/*.css",
     "./package.json": "./package.json"

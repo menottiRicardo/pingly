@@ -53,6 +53,16 @@
         "default": "./dist/inbox/index.cjs"
       }
     },
+    "./realtime": {
+      "import": {
+        "types": "./dist/realtime/index.d.ts",
+        "default": "./dist/realtime/index.js"
+      },
+      "require": {
+        "types": "./dist/realtime/index.d.cts",
+        "default": "./dist/realtime/index.cjs"
+      }
+    },
     "./styles.css": "./dist/styles.css",
     "./*.css": "./dist/*.css",
     "./package.json": "./package.json"

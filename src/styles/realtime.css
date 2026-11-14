@@ -1,0 +1,30 @@
+.pingly-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--pingly-muted);
+}
+.pingly-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pingly-faint);
+}
+.pingly-status[data-status='open'] .pingly-status-dot {
+  background: var(--pingly-success);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pingly-success) 25%, transparent);
+}
+.pingly-status:is([data-status='connecting'], [data-status='reconnecting']) .pingly-status-dot {
+  background: var(--pingly-warning);
+  animation: pingly-pulse 1.2s ease-in-out infinite;
+}
+.pingly-status:is([data-status='offline'], [data-status='closed']) .pingly-status-dot {
+  background: var(--pingly-error);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pingly-status-dot {
+    animation: none !important;
+  }
+}

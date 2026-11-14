@@ -16,6 +16,8 @@ export interface ToastApi<C> {
   info(title: C, options?: TypedToastOptions<C>): string;
   warning(title: C, options?: TypedToastOptions<C>): string;
   loading(title: C, options?: TypedToastOptions<C>): string;
+  /** Render fully custom content inside the toaster. */
+  custom(render: (id: string) => C, options?: TypedToastOptions<C>): string;
   /**
    * Show a loading toast that turns into a success or error toast when the
    * promise settles. Returns the original promise.
@@ -40,6 +42,8 @@ export function createToastApi<C>(store: ToastStore<C>): ToastApi<C> {
   api.info = typed('info');
   api.warning = typed('warning');
   api.loading = typed('loading');
+  api.custom = (render, options) =>
+    store.add(undefined as C, { ...options, render, unstyled: options?.unstyled ?? true });
   api.update = (id, patch) => store.update(id, patch);
   api.dismiss = (id) => store.dismiss(id);
 

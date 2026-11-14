@@ -47,3 +47,24 @@ export function bindWindowFocus(store: {
     store.resume('window');
   };
 }
+
+/**
+ * Whether a keyboard event matches a hotkey such as `['altKey', 'KeyT']`:
+ * modifier names (`altKey`, `ctrlKey`, `metaKey`, `shiftKey`) plus `event.code` values.
+ */
+export function matchesHotkey(
+  event: { code: string; altKey: boolean; ctrlKey: boolean; metaKey: boolean; shiftKey: boolean },
+  hotkey: readonly string[],
+): boolean {
+  if (hotkey.length === 0) return false;
+  return hotkey.every((key) =>
+    key === 'altKey' || key === 'ctrlKey' || key === 'metaKey' || key === 'shiftKey'
+      ? event[key]
+      : event.code === key,
+  );
+}
+
+/** Human-readable hotkey for labels, e.g. `alt+T`. */
+export function describeHotkey(hotkey: readonly string[]): string {
+  return hotkey.map((key) => key.replace(/Key$/, '').replace(/^Key|^Digit/, '')).join('+');
+}

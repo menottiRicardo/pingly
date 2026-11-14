@@ -51,7 +51,24 @@
   font-size: 14px;
   line-height: 1.4;
   pointer-events: auto;
+  position: relative;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
   animation: pingly-enter var(--pingly-duration) ease-out both;
+  transition:
+    translate var(--pingly-duration) ease,
+    transform var(--pingly-duration) ease,
+    opacity var(--pingly-duration) ease;
+}
+.pingly-toast:focus-visible {
+  outline: 2px solid var(--pingly-focus);
+  outline-offset: 2px;
+}
+.pingly-toast[data-custom] {
+  display: block;
+  padding: 0;
+  overflow: visible;
 }
 .pingly-toast[data-state='leaving'] {
   animation: pingly-leave var(--pingly-duration) ease-in both;
@@ -63,6 +80,127 @@
 }
 .pingly-toaster[data-y='bottom'] .pingly-toast {
   --pingly-from: 12px;
+}
+
+/* Swipe to dismiss. `translate` is separate from the `transform` used by animations. */
+.pingly-toast[data-swipe-axis='x'] {
+  translate: var(--pingly-swipe, 0) 0;
+}
+.pingly-toast[data-swipe-axis='y'] {
+  translate: 0 var(--pingly-swipe, 0);
+}
+.pingly-toast[data-swiping] {
+  transition: none;
+  cursor: grabbing;
+}
+.pingly-toast[data-swipe-out][data-state='leaving'] {
+  animation: none;
+  opacity: 0;
+}
+.pingly-toast[data-swipe-axis='x'][data-swipe-out='1'][data-state='leaving'] {
+  translate: 110% 0;
+}
+.pingly-toast[data-swipe-axis='x'][data-swipe-out='-1'][data-state='leaving'] {
+  translate: -110% 0;
+}
+.pingly-toast[data-swipe-axis='y'][data-swipe-out='1'][data-state='leaving'] {
+  translate: 0 110%;
+}
+.pingly-toast[data-swipe-axis='y'][data-swipe-out='-1'][data-state='leaving'] {
+  translate: 0 -110%;
+}
+
+/* Stacked deck: toasts share one grid cell until the toaster is hovered or focused. */
+.pingly-list[data-stacked][data-expanded='false'] {
+  display: grid;
+}
+.pingly-list[data-stacked][data-expanded='false'] > .pingly-toast {
+  grid-area: 1 / 1;
+  z-index: calc(100 - var(--pingly-index, 0));
+  transform: translateY(calc(var(--pingly-index, 0) * var(--pingly-peek, -10px)))
+    scale(calc(1 - var(--pingly-index, 0) * 0.05));
+}
+.pingly-toaster[data-y='bottom'] .pingly-list[data-stacked] > .pingly-toast {
+  align-self: end;
+}
+.pingly-toaster[data-y='top'] .pingly-list[data-stacked] {
+  --pingly-peek: 10px;
+}
+.pingly-toaster[data-y='top'] .pingly-list[data-stacked] > .pingly-toast {
+  align-self: start;
+}
+.pingly-list[data-stacked][data-expanded='false'] > .pingly-toast:not([data-index='0']) > * {
+  opacity: 0;
+}
+.pingly-list[data-stacked][data-expanded='false'] > .pingly-toast[data-index='3'],
+.pingly-list[data-stacked][data-expanded='false'] > .pingly-toast[data-index='4'] {
+  opacity: 0;
+}
+
+/* Rich colors */
+.pingly-toaster[data-rich-colors] .pingly-toast[data-type='success'] {
+  background: var(--pingly-success-bg);
+  border-color: color-mix(in srgb, var(--pingly-success) 30%, transparent);
+}
+.pingly-toaster[data-rich-colors] .pingly-toast[data-type='error'] {
+  background: var(--pingly-error-bg);
+  border-color: color-mix(in srgb, var(--pingly-error) 30%, transparent);
+}
+.pingly-toaster[data-rich-colors] .pingly-toast[data-type='info'] {
+  background: var(--pingly-info-bg);
+  border-color: color-mix(in srgb, var(--pingly-info) 30%, transparent);
+}
+.pingly-toaster[data-rich-colors] .pingly-toast[data-type='warning'] {
+  background: var(--pingly-warning-bg);
+  border-color: color-mix(in srgb, var(--pingly-warning) 30%, transparent);
+}
+
+/* Progress bar */
+.pingly-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: currentColor;
+  opacity: 0.25;
+  transform-origin: left;
+  animation: pingly-progress linear forwards;
+}
+.pingly-toast[data-type='success'] .pingly-progress {
+  color: var(--pingly-success);
+  opacity: 0.6;
+}
+.pingly-toast[data-type='error'] .pingly-progress {
+  color: var(--pingly-error);
+  opacity: 0.6;
+}
+.pingly-toast[data-type='info'] .pingly-progress {
+  color: var(--pingly-info);
+  opacity: 0.6;
+}
+.pingly-toast[data-type='warning'] .pingly-progress {
+  color: var(--pingly-warning);
+  opacity: 0.6;
+}
+.pingly-toaster[data-paused] .pingly-progress {
+  animation-play-state: paused;
+}
+@keyframes pingly-progress {
+  to {
+    transform: scaleX(0);
+  }
+}
+
+.pingly-count {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--pingly-bg-hover);
+  color: var(--pingly-muted);
+  font-size: 12px;
+  font-weight: 500;
 }
 
 @keyframes pingly-enter {
@@ -153,11 +291,14 @@
 }
 .pingly-action:focus-visible,
 .pingly-close:focus-visible {
-  outline: 2px solid var(--pingly-info);
+  outline: 2px solid var(--pingly-focus);
   outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .pingly-toast {
+    transition: none;
+  }
   .pingly-toast,
   .pingly-toast[data-state='leaving'],
   .pingly-toast[data-type='loading'] .pingly-icon svg {

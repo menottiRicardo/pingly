@@ -10,3 +10,8 @@ import type { ToastData } from './types';
 export function useToasts(): readonly ToastData<ReactNode>[] {
   return useSyncExternalStore(store.subscribe, store.getSnapshot, store.getSnapshot);
 }
+
+/** Whether toast timers are currently paused. */
+export function useToastsPaused(): boolean {
+  return useSyncExternalStore(store.subscribe, store.getPaused, store.getPaused);
+}

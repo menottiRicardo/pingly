@@ -215,7 +215,7 @@ pnpm install
 pnpm example
 ```
 
-Opens a demo app wired to a fake typed event stream, with every component on show.
+Opens a demo app with every component on show. A fake backend speaks real WebSocket, SSE and polling, so the library's transports run for real, and a **Chaos** panel adds latency, random failures, an unreachable server, dropped connections and page crashes so you can watch rollbacks, retries, reconnects and resume.
 
 ## Development
 

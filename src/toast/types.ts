@@ -1,3 +1,5 @@
+import type { Theme } from '../shared/config';
+
 export type ToastType = 'default' | 'success' | 'error' | 'info' | 'warning' | 'loading';
 
 export type ToastPosition =
@@ -6,7 +8,7 @@ export type ToastPosition =
 /** `visible` while shown, `leaving` while the exit animation runs. */
 export type ToastState = 'visible' | 'leaving';
 
-export type ToastTheme = 'light' | 'dark' | 'system';
+export type ToastTheme = Theme;
 
 export interface ToastActionEvent {
   preventDefault(): void;

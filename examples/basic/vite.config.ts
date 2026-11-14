@@ -8,7 +8,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: [
-      { find: /^pingly\/styles\.css$/, replacement: src('styles.css') },
+      { find: /^pingly\/styles\.css$/, replacement: src('styles/index.css') },
+      { find: /^pingly\/(\w+)$/, replacement: src('$1/index.ts') },
       { find: /^pingly$/, replacement: src('index.ts') },
     ],
   },

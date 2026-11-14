@@ -1,0 +1,102 @@
+/* Design tokens shared by every pingly component. Override any of them on
+   `.pingly-root` (or a more specific selector) to theme the library. */
+.pingly-root {
+  --pingly-bg: #ffffff;
+  --pingly-bg-subtle: #f9fafb;
+  --pingly-bg-hover: #f3f4f6;
+  --pingly-fg: #111827;
+  --pingly-muted: #4b5563;
+  --pingly-faint: #9ca3af;
+  --pingly-border: #e5e7eb;
+  --pingly-shadow: 0 6px 24px rgb(0 0 0 / 0.1), 0 1px 3px rgb(0 0 0 / 0.08);
+  --pingly-accent: #2563eb;
+  --pingly-accent-fg: #ffffff;
+  --pingly-unread: #eff6ff;
+  --pingly-success: #16a34a;
+  --pingly-error: #dc2626;
+  --pingly-info: #2563eb;
+  --pingly-warning: #d97706;
+  --pingly-loading: #6b7280;
+  --pingly-success-bg: #f0fdf4;
+  --pingly-error-bg: #fef2f2;
+  --pingly-info-bg: #eff6ff;
+  --pingly-warning-bg: #fffbeb;
+  --pingly-badge-bg: #dc2626;
+  --pingly-badge-fg: #ffffff;
+  --pingly-action-bg: #111827;
+  --pingly-action-fg: #ffffff;
+  --pingly-focus: #2563eb;
+  --pingly-radius: 10px;
+  --pingly-radius-sm: 6px;
+  --pingly-width: 356px;
+  --pingly-font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --pingly-duration: 200ms;
+  font-family: var(--pingly-font);
+  color: var(--pingly-fg);
+}
+
+.pingly-root[data-theme='dark'] {
+  --pingly-bg: #18181b;
+  --pingly-bg-subtle: #1f1f23;
+  --pingly-bg-hover: #27272a;
+  --pingly-fg: #f4f4f5;
+  --pingly-muted: #a1a1aa;
+  --pingly-faint: #71717a;
+  --pingly-border: #27272a;
+  --pingly-shadow: 0 6px 24px rgb(0 0 0 / 0.5);
+  --pingly-accent: #60a5fa;
+  --pingly-accent-fg: #0b1220;
+  --pingly-unread: #172033;
+  --pingly-success: #4ade80;
+  --pingly-error: #f87171;
+  --pingly-info: #60a5fa;
+  --pingly-warning: #fbbf24;
+  --pingly-loading: #a1a1aa;
+  --pingly-success-bg: #052e16;
+  --pingly-error-bg: #450a0a;
+  --pingly-info-bg: #172554;
+  --pingly-warning-bg: #451a03;
+  --pingly-action-bg: #f4f4f5;
+  --pingly-action-fg: #18181b;
+  --pingly-focus: #60a5fa;
+}
+
+@media (prefers-color-scheme: dark) {
+  .pingly-root[data-theme='system'] {
+    --pingly-bg: #18181b;
+    --pingly-bg-subtle: #1f1f23;
+    --pingly-bg-hover: #27272a;
+    --pingly-fg: #f4f4f5;
+    --pingly-muted: #a1a1aa;
+    --pingly-faint: #71717a;
+    --pingly-border: #27272a;
+    --pingly-shadow: 0 6px 24px rgb(0 0 0 / 0.5);
+    --pingly-accent: #60a5fa;
+    --pingly-accent-fg: #0b1220;
+    --pingly-unread: #172033;
+    --pingly-success: #4ade80;
+    --pingly-error: #f87171;
+    --pingly-info: #60a5fa;
+    --pingly-warning: #fbbf24;
+    --pingly-loading: #a1a1aa;
+    --pingly-success-bg: #052e16;
+    --pingly-error-bg: #450a0a;
+    --pingly-info-bg: #172554;
+    --pingly-warning-bg: #451a03;
+    --pingly-action-bg: #f4f4f5;
+    --pingly-action-fg: #18181b;
+    --pingly-focus: #60a5fa;
+  }
+}
+
+.pingly-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

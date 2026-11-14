@@ -18,7 +18,7 @@ export default tseslint.config(
     // Keep state, timing and markup helpers free of React so they stay
     // simple to test and reason about. React lives in the view files only.
     files: ['src/**/*.ts'],
-    ignores: ['src/useToasts.ts', 'src/index.ts'],
+    ignores: ['src/**/use*.ts'],
     rules: {
       '@typescript-eslint/no-restricted-imports': [
         'error',
@@ -26,12 +26,12 @@ export default tseslint.config(
           paths: [
             {
               name: 'react',
-              message: 'Only view files (*.tsx, useToasts.ts) may import React.',
+              message: 'Only view files (*.tsx, use*.ts) may import React.',
               allowTypeImports: true,
             },
             {
               name: 'react-dom',
-              message: 'Only view files (*.tsx) may import react-dom.',
+              message: 'Only view files (*.tsx, use*.ts) may import react-dom.',
               allowTypeImports: true,
             },
           ],

@@ -1,4 +1,4 @@
-import { ToastStore, selectShown } from '../src/store';
+import { ToastStore, selectShown } from '../../src/toast/store';
 
 describe('ToastStore', () => {
   let store: ToastStore<string>;

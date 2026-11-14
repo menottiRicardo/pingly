@@ -1,6 +1,6 @@
 import type { KeyboardEvent, MouseEvent, ReactNode } from 'react';
-import { store } from './client';
-import { CLOSE_ICON, ICONS, cx, toastRole } from './dom';
+import { store } from './instance';
+import { CLOSE_ICON, TOAST_ICONS, cx, toastRole } from './dom';
 import type { ToastData } from './types';
 
 export interface ToastProps {
@@ -10,7 +10,7 @@ export interface ToastProps {
 
 export function Toast({ toast, closeButton = false }: ToastProps) {
   const { id, type, title, description, action, dismissible, className, state } = toast;
-  const icon = ICONS[type];
+  const icon = TOAST_ICONS[type];
 
   const onKeyDown = (event: KeyboardEvent<HTMLLIElement>) => {
     if (event.key === 'Escape' && dismissible) store.dismiss(id);

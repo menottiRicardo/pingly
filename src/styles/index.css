@@ -1,0 +1,4 @@
+/* Development entry that loads every stylesheet; the build bundles the same
+   files into dist/styles.css. */
+@import './tokens.css';
+@import './toast.css';

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { useSyncExternalStore } from 'react';
-import { store } from './client';
+import { store } from './instance';
 import type { ToastData } from './types';
 
 /**

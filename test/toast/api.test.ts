@@ -1,5 +1,5 @@
-import { ToastStore } from '../src/store';
-import { createToastApi } from '../src/api';
+import { ToastStore } from '../../src/toast/store';
+import { createToastApi } from '../../src/toast/api';
 
 describe('toast api', () => {
   const setup = () => {

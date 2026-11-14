@@ -33,7 +33,18 @@
         "default": "./dist/index.cjs"
       }
     },
+    "./toast": {
+      "import": {
+        "types": "./dist/toast/index.d.ts",
+        "default": "./dist/toast/index.js"
+      },
+      "require": {
+        "types": "./dist/toast/index.d.cts",
+        "default": "./dist/toast/index.cjs"
+      }
+    },
     "./styles.css": "./dist/styles.css",
+    "./*.css": "./dist/*.css",
     "./package.json": "./package.json"
   },
   "files": [

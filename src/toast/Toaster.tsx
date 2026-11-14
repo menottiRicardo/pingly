@@ -1,6 +1,7 @@
 import type { CSSProperties, FocusEvent } from 'react';
 import { useEffect, useMemo } from 'react';
-import { store } from './client';
+import { store } from './instance';
+import { useTheme } from '../shared/ConfigContext';
 import { bindWindowFocus, cx, parsePosition, toCssLength } from './dom';
 import { selectShown } from './store';
 import { Toast } from './Toast';
@@ -20,7 +21,7 @@ export interface ToasterProps {
   offset?: number | string;
   /** Show a close button on every dismissible toast. */
   closeButton?: boolean;
-  /** Color scheme. `system` follows `prefers-color-scheme`. Defaults to `light`. */
+  /** Color scheme. `system` follows `prefers-color-scheme`. Defaults to the provider's theme, else `light`. */
   theme?: ToastTheme;
   /** Accessible name of the notifications region. */
   label?: string;
@@ -35,11 +36,12 @@ export function Toaster({
   gap = 12,
   offset = 24,
   closeButton = false,
-  theme = 'light',
+  theme: themeProp,
   label = 'Notifications',
   className,
   style,
 }: ToasterProps) {
+  const theme = useTheme(themeProp);
   const toasts = useToasts();
   const shown = useMemo(() => selectShown(toasts, max).reverse(), [toasts, max]);
   const { x, y } = parsePosition(position);
@@ -54,7 +56,7 @@ export function Toaster({
   return (
     <section
       aria-label={label}
-      className={cx('pingly-toaster', className)}
+      className={cx('pingly-root pingly-toaster', className)}
       data-x={x}
       data-y={y}
       data-theme={theme}

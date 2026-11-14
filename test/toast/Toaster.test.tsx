@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { Toaster, toast } from '../src';
+import { Toaster, toast } from '../../src';
 
 describe('<Toaster />', () => {
   beforeEach(() => vi.useFakeTimers());

@@ -9,7 +9,7 @@ describe('<Toaster />', () => {
     act(() => {
       toast.success('Saved', { description: 'All changes stored' });
     });
-    const item = screen.getByRole('status');
+    const item = screen.getByRole('listitem');
     expect(item).toHaveTextContent('Saved');
     expect(item).toHaveTextContent('All changes stored');
     expect(item).toHaveAttribute('data-type', 'success');
@@ -36,9 +36,9 @@ describe('<Toaster />', () => {
       toast('Temporary');
     });
     act(() => vi.advanceTimersByTime(1000));
-    expect(screen.getByRole('status')).toHaveAttribute('data-state', 'leaving');
+    expect(screen.getByRole('listitem')).toHaveAttribute('data-state', 'leaving');
     act(() => vi.advanceTimersByTime(200));
-    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.queryByRole('listitem')).not.toBeInTheDocument();
   });
 
   it('pauses while hovered', () => {
@@ -48,10 +48,10 @@ describe('<Toaster />', () => {
     });
     fireEvent.mouseEnter(screen.getByRole('region'));
     act(() => vi.advanceTimersByTime(5000));
-    expect(screen.getByRole('status')).toHaveAttribute('data-state', 'visible');
+    expect(screen.getByRole('listitem')).toHaveAttribute('data-state', 'visible');
     fireEvent.mouseLeave(screen.getByRole('region'));
     act(() => vi.advanceTimersByTime(1000));
-    expect(screen.getByRole('status')).toHaveAttribute('data-state', 'leaving');
+    expect(screen.getByRole('listitem')).toHaveAttribute('data-state', 'leaving');
   });
 
   it('dismisses via the close button and Escape', () => {
@@ -61,7 +61,7 @@ describe('<Toaster />', () => {
       toast('Two');
     });
     fireEvent.click(screen.getAllByRole('button', { name: 'Close notification' })[0]!);
-    const items = screen.getAllByRole('status');
+    const items = screen.getAllByRole('listitem');
     expect(items.filter((i) => i.dataset.state === 'leaving')).toHaveLength(1);
     const visible = items.find((i) => i.dataset.state === 'visible')!;
     fireEvent.keyDown(visible, { key: 'Escape' });
@@ -91,7 +91,7 @@ describe('<Toaster />', () => {
       toast('2');
       toast('3');
     });
-    expect(screen.getAllByRole('status').map((i) => i.textContent)).toEqual(['3', '2']);
+    expect(screen.getAllByRole('listitem').map((i) => i.textContent)).toEqual(['3', '2']);
   });
 
   it('accepts JSX content', () => {
@@ -175,7 +175,7 @@ describe('<Toaster /> upgrades', () => {
       toast('Copied', { dedupeKey: 'copy' });
       toast('Copied', { dedupeKey: 'copy' });
     });
-    expect(screen.getAllByRole('status')).toHaveLength(1);
+    expect(screen.getAllByRole('listitem')).toHaveLength(1);
     expect(screen.getByText('×3')).toBeInTheDocument();
   });
 

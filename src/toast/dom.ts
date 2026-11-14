@@ -14,7 +14,10 @@ export const TOAST_ICONS: Record<ToastType, string | null> = {
 
 export const CLOSE_ICON = ICONS.close;
 
-/** Errors interrupt screen readers; everything else is announced politely. */
+/**
+ * Errors interrupt screen readers; everything else is announced politely by
+ * the toaster's live list.
+ */
 export function toastRole(type: ToastType): 'alert' | 'status' {
   return type === 'error' ? 'alert' : 'status';
 }

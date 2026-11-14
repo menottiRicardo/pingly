@@ -91,8 +91,6 @@ export function Toast({
 
   const common = {
     ref,
-    role: toastRole(type),
-    'aria-atomic': true as const,
     'data-type': type,
     'data-state': state,
     'data-index': index,
@@ -133,7 +131,11 @@ export function Toast({
   return (
     <li {...common} className={pick(unstyled, 'pingly-toast', className, cn.toast)}>
       {icon}
-      <div className={pick(unstyled, 'pingly-content', cn.content)}>
+      <div
+        className={pick(unstyled, 'pingly-content', cn.content)}
+        role={toastRole(type) === 'alert' ? 'alert' : undefined}
+        aria-atomic="true"
+      >
         <div className={pick(unstyled, 'pingly-title', cn.title)}>
           {title}
           {toast.count > 1 && (
